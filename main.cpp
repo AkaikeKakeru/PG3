@@ -3,7 +3,7 @@
 //再帰関数で、再帰的な体制の合計賃金を計算
 ///<int n == 再帰させる値>
 ///<int remain == 残りカウント>
-int Recursive(int n, int remain) {
+int RecursiveParameter(int n, int remain) {
 	//残りカウントを減らす
 	remain--;
 
@@ -20,7 +20,7 @@ int Recursive(int n, int remain) {
 	}
 
 	//前回の値を2倍し、50引いた値を、次の引数とする
-	return Recursive((2*n)-50,remain);
+	return RecursiveParameter((2*n)-50,remain);
 }
 
 int main(void)
@@ -33,7 +33,7 @@ int main(void)
 	int workingTime = 9; //労働時間
 
 	//再帰的な体制の合計賃金を算出
-	result = Recursive(recursiveSalary,workingTime);
+	result = RecursiveParameter(recursiveSalary,workingTime);
 	printf("再帰的体制の合計賃金 = %d\n\n",result);
 
 	//一般的な体制の合計賃金を算出
