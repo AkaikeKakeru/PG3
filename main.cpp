@@ -27,12 +27,14 @@ int main(void)
 {
 	int normalSalary = 1072; //一般的な賃金体制
 
-	int recursiveSalary; //再帰的な賃金体制の初期値
+	int recursiveSalary; //再帰的な賃金体制
+
+	int recursiveSalaryStart = 100; //再帰的な賃金体制の初期値
 
 	int workingTime = 8; //労働時間
 
 	//再帰的な体制の合計賃金を算出
-	recursiveSalary = RecursiveParameter(100,workingTime);
+	recursiveSalary = RecursiveParameter(recursiveSalaryStart,workingTime);
 	printf("再帰的体制の合計賃金 = %d\n\n",recursiveSalary);
 
 	//一般的な体制の合計賃金を算出
