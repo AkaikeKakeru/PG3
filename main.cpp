@@ -25,7 +25,7 @@ int main(void) {
 
 	pFunc = &InputPredict;
 
-	pFunc(ans);
+	ans = pFunc(ans);
 	if (ans != ErrorNum) {
 		pFunc = &Return;
 		pFunc(ans);
