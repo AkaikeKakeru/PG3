@@ -106,7 +106,7 @@ int ReturnResult(int ans) {
 	//メルセンヌ・ツイスターの乱数エンジン
 	std::mt19937_64 engine(seed_gen());
 	//乱数範囲
-	std::uniform_real_distribution < float > dist(1, 10);
+	std::uniform_int_distribution < int > dist(1, 6);
 
 	// 乱数を1つ選出
 	int rand = static_cast<int>(dist(engine));
@@ -121,6 +121,7 @@ int ReturnResult(int ans) {
 		printf_s("【的中です】\n");
 		return true;
 	}
+
 	// 一致しなかったら
 	printf_s("【ハズレです】\n");
 	return false;
