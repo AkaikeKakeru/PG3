@@ -2,41 +2,48 @@
 #include <string.h>
 #include <random>
 
+typedef int (*newType)(int ans);
+
 enum Number {
 	EvenNum = 0,
 	OddNum = 1,
 	ErrorNum = 999,
 };
 
-int InputPredict(char* str);
-
+int InputPredict(int ans);
 bool NowWait(float time);
-bool Return(int input);
+int Return(int ans);
 
-int main(void)
-{
-	char str[10] = "‚«‚·‚¤";
+int main(void) {
+	//char str[10] = "‚«‚·‚¤";
 	int input = 0;
 	bool judge = false;
 	int waitTimer = 3 * 50;
+	int ans = EvenNum;
 
-	printf_s("yŠï”‚©‹ô”‚©A—\‘z‚ğ“ü—Í‚µ‚Ä‚­‚¾‚³‚¢z\n");
-	scanf_s("%s",&str,10);
+	newType pFunc = nullptr;
 
-	input = InputPredict(str);
+	pFunc = &InputPredict;
 
-	judge = Return(input);
+	pFunc(ans);
+	if (ans != ErrorNum) {
+		pFunc = &Return;
+		pFunc(ans);
+	}
 
 	return 0;
 }
 
-int InputPredict(char* str) {
+int InputPredict(int ans) {
+	char str[10] = "‚«‚·‚¤";
+
 	const char ODD[] = "Šï”";
 	const char EVEN[] = "‹ô”";
 	const char odd[] = "‚«‚·‚¤";
 	const char even[] = "‚®‚¤‚·‚¤";
 
-	int ans = EvenNum;
+	printf_s("yŠï”‚©‹ô”‚©A—\‘z‚ğ“ü—Í‚µ‚Ä‚­‚¾‚³‚¢z\n");
+	scanf_s("%s", &str, 10);
 
 	if (strcmp(str, ODD) == 0
 		|| strcmp(str, odd) == 0) {
@@ -62,12 +69,15 @@ int InputPredict(char* str) {
 }
 
 bool NowWait(float time) {
+	time--;
 
-
-	return true;
+	if (time <= 0) {
+		return true;
+	}
+	return false;
 }
 
-bool Return(int input) {
+int Return(int ans) {
 	//—”ƒV[ƒh¶¬Ší
 	std::random_device seed_gen;
 	//ƒƒ‹ƒZƒ“ƒkEƒcƒCƒXƒ^[‚Ì—”ƒGƒ“ƒWƒ“
@@ -75,17 +85,16 @@ bool Return(int input) {
 	//—””ÍˆÍ
 	std::uniform_real_distribution < float > dist(1, 10);
 
-	int ans = static_cast<int>(dist(engine));
+	int rand = static_cast<int>(dist(engine));
 
-	printf_s("y%d‚ª‘Io‚³‚ê‚Ü‚µ‚½z\n\n", ans);
+	printf_s("y%d‚ª‘Io‚³‚ê‚Ü‚µ‚½z\n\n", rand);
 
-	ans = ans % 2;
+	rand = rand % 2;
 
-	if (input == ans) {
+	if (ans == rand) {
 		printf_s("y“I’†‚Å‚·z\n");
 		return true;
 	}
-
-		printf_s("yƒnƒYƒŒ‚Å‚·z\n");
-		return false;
+	printf_s("yƒnƒYƒŒ‚Å‚·z\n");
+	return false;
 }
