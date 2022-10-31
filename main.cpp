@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <string.h>
 #include <random>
+#include <Windows.h>
 
 typedef int (*newType)(int ans);
 
@@ -11,14 +12,11 @@ enum Number {
 };
 
 int InputPredict(int ans);
-bool NowWait(float time);
+void NowWait(newType pFunc, int ans ,int timer);
 int Return(int ans);
 
 int main(void) {
-	//char str[10] = "Ç´Ç∑Ç§";
-	int input = 0;
-	bool judge = false;
-	int waitTimer = 3 * 50;
+	int waitTimer = 3;
 	int ans = EvenNum;
 
 	newType pFunc = nullptr;
@@ -27,8 +25,10 @@ int main(void) {
 
 	ans = pFunc(ans);
 	if (ans != ErrorNum) {
+		printf_s("Åyåãâ ÇÕ...Åz\n");
+
 		pFunc = &Return;
-		pFunc(ans);
+		NowWait(pFunc,ans,waitTimer);
 	}
 
 	return 0;
@@ -68,13 +68,10 @@ int InputPredict(int ans) {
 	return ans;
 }
 
-bool NowWait(float time) {
-	time--;
+void NowWait(newType pFunc, int ans ,int timer) {
+	Sleep(timer * 1000);
 
-	if (time <= 0) {
-		return true;
-	}
-	return false;
+	pFunc(ans);
 }
 
 int Return(int ans) {
