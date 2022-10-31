@@ -20,16 +20,12 @@ int main(void)
 	bool judge = false;
 	int waitTimer = 3 * 50;
 
-
+	printf_s("yŠï”‚©‹ô”‚©A—\‘z‚ğ“ü—Í‚µ‚Ä‚­‚¾‚³‚¢z\n");
 	scanf_s("%s",&str,10);
 
 	input = InputPredict(str);
 
-	printf_s("“ü—Í = %s\n\n", str);
-
 	judge = Return(input);
-
-	printf_s("\nans = %d\n", judge);
 
 	return 0;
 }
@@ -46,7 +42,7 @@ int InputPredict(char* str) {
 		|| strcmp(str, odd) == 0) {
 		ans = OddNum;
 
-		printf_s("yŠï”‚Ì“ü—Í‚ğŠm”Fz\n");
+		printf_s("yŠï”‚Ì“ü—Í‚ğŠm”Fz\n\n");
 		return ans;
 	}
 
@@ -54,13 +50,13 @@ int InputPredict(char* str) {
 		|| strcmp(str, even) == 0) {
 		ans = EvenNum;
 
-		printf_s("y‹ô”‚Ì“ü—Í‚ğŠm”Fz\n");
+		printf_s("y‹ô”‚Ì“ü—Í‚ğŠm”Fz\n\n");
 		return ans;
 	}
 
 	ans = ErrorNum;
 
-	printf_s("y‘z’èŠO‚Ì“ü—Í‚ğŠm”Fz\n"
+	printf_s("y‘z’èŠO‚Ì“ü—Í‚ğŠm”Fz\n\n"
 		"%d‚ªo—Í‚³‚ê‚Ü‚µ‚½\n", ans);
 	return ans;
 }
@@ -81,15 +77,15 @@ bool Return(int input) {
 
 	int ans = static_cast<int>(dist(engine));
 
-	printf_s("%d‚ª‘Io‚³‚ê‚Ü‚µ‚½\n", ans);
+	printf_s("y%d‚ª‘Io‚³‚ê‚Ü‚µ‚½z\n\n", ans);
 
 	ans = ans % 2;
 
 	if (input == ans) {
-		printf_s("“I’†‚Å‚·\n");
+		printf_s("y“I’†‚Å‚·z\n");
 		return true;
 	}
 
-		printf_s("ƒnƒYƒŒ‚Å‚·\n");
+		printf_s("yƒnƒYƒŒ‚Å‚·z\n");
 		return false;
 }
