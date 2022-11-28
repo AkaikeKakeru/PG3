@@ -25,7 +25,7 @@ int main(void) {
 
 	function pFunc = nullptr; //関数ポインタ
 
-	std::function<int(int)> fInput = [](int ans) {
+	std::function<int(int)> fInput = [=](int ans) {
 		char str[10] = "きすう"; //プレイヤーの入力文字配列
 
 		const char ODD[] = "奇数"; //比較用文字配列
@@ -69,7 +69,7 @@ int main(void) {
 		return ans;
 	};
 
-	std::function<int(int)> fRsult = [](int ans) {
+	std::function<int(int)> fResult = [=](int ans) {
 		//乱数シード生成器
 		std::random_device seed_gen;
 		//メルセンヌ・ツイスターの乱数エンジン
@@ -96,7 +96,7 @@ int main(void) {
 		return false;
 	};
 
-	auto fTimer = [](function pFunc, int ans, int timer) {
+	auto fTimer = [&](function pFunc, int ans, int timer) {
 		//timerをsecondに変換しつつ、pFuncの起動を遅らせる。
 		Sleep(timer * 1000);
 
@@ -105,20 +105,16 @@ int main(void) {
 	};
 
 	//予測を入力するフェーズ
-	pFunc = &InputPredict;
-
 	//読み取った入力から、ansに EvenNum か OddNum を代入
-	ans = pFunc(ans);
+	ans = fInput(ans);
 
 	//エラーナンバーじゃないなら
 	if (ans != ErrorNum) {
 		printf_s("【結果は...】\n");
 
 		//結果を出力するフェーズ
-		pFunc = &ReturnResult;
-
-		//勿体ぶってからReturnResultを起動
-		SetWaitTimer(pFunc, ans, waitTimer);
+		//勿体ぶってからfResultを起動
+		fTimer(fResult(ans), ans, waitTimer);
 	}
 
 	//終了
