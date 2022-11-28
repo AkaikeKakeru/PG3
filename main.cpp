@@ -96,12 +96,12 @@ int main(void) {
 		return false;
 	};
 
-	auto fTimer = [&](function pFunc, int ans, int timer) {
+	auto fTimer = [=](int ans, int timer) {
 		//timerをsecondに変換しつつ、pFuncの起動を遅らせる。
 		Sleep(timer * 1000);
 
 		//Sleep終了直後に起動
-		pFunc(ans);
+		ReturnResult(ans);
 	};
 
 	//予測を入力するフェーズ
@@ -114,7 +114,7 @@ int main(void) {
 
 		//結果を出力するフェーズ
 		//勿体ぶってからfResultを起動
-		fTimer(fResult(ans), ans, waitTimer);
+		fTimer(ans, waitTimer);
 	}
 
 	//終了
