@@ -1,6 +1,7 @@
 #include <stdio.h> //printf_s使うため
 #include <random> //乱数使うため
 #include <Windows.h> //Sleep使うため
+#include <functional> //std::function使うため
 
 //関数ポインタ用にtypedefで型を用意
 typedef int (*function)(int ans);
