@@ -96,12 +96,12 @@ int main(void) {
 		return false;
 	};
 
-	auto fTimer = [=](int ans, int timer) {
-		//timerをsecondに変換しつつ、pFuncの起動を遅らせる。
+	auto fTimer = [=](std::function<int(int)> func,int ans, int timer) {
+		//timerをsecondに変換しつつ、funcの起動を遅らせる。
 		Sleep(timer * 1000);
 
 		//Sleep終了直後に起動
-		ReturnResult(ans);
+		func(ans);
 	};
 
 	//予測を入力するフェーズ
@@ -114,7 +114,7 @@ int main(void) {
 
 		//結果を出力するフェーズ
 		//勿体ぶってからfResultを起動
-		fTimer(ans, waitTimer);
+		fTimer(fResult,ans, waitTimer);
 	}
 
 	//終了
