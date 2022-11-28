@@ -15,6 +15,7 @@ int main(void) {
 	int waitTimer = 3; //タイマー[second]
 	int ans = EvenNum; //プレイヤーの、丁か半かの予測
 
+	//入力フェーズ
 	std::function<int(int)> fInput = [=](int ans) {
 		char str[10] = "きすう"; //プレイヤーの入力文字配列
 
@@ -59,6 +60,7 @@ int main(void) {
 		return ans;
 	};
 
+	//出力フェーズ
 	std::function<int(int)> fResult = [=](int ans) {
 		//乱数シード生成器
 		std::random_device seed_gen;
@@ -86,6 +88,7 @@ int main(void) {
 		return false;
 	};
 
+	//タイマーセット
 	auto fTimer = [=](std::function<int(int)> func,int ans, int timer) {
 		//timerをsecondに変換しつつ、funcの起動を遅らせる。
 		Sleep(timer * 1000);
