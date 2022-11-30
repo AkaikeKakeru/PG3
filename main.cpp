@@ -7,21 +7,15 @@
 using namespace std;
 
 int main(){
-	vector<float> f = {1.2,2.3,3.4};
+	vector<string> f = {"a","b","c"};
 	int size = f.size();
 
-	vector<float>::iterator it;
-	it = f.begin();
+	for (vector<string>::iterator it_f = f.begin();
+		it_f != f.end();
+		it_f++){
 
-	cout << *it << endl;
-
-	it++;
-
-	cout << *it << endl;
-
-	it++;
-
-	cout << *it << endl;
+		cout << *it_f << endl;
+	}
 
 	return 0;
 }
