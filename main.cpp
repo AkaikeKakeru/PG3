@@ -1,5 +1,6 @@
 #include <windows.h>
 #include <stdio.h>
+#include <stdlib.h>
 
 typedef struct cell {
   int val;
@@ -12,15 +13,30 @@ void Create(CELL *currentCell, int val);
 void Index(CELL *endCell);
 
 int main(void) {
-  SetConsoleOutputCP(CP_UTF8);
-  setvbuf(stdout, nullptr, _IOFBF, 1024);
+ // SetConsoleOutputCP(CP_UTF8);
+//  setvbuf(stdout, nullptr, _IOFBF, 1024);
 
   int iterator;
   int inputValue;
   CELL *insertCell;
 
-  CELL head;
+  CELL head{};
   head.next = nullptr;
+  head.prev = nullptr;
+
+  while (1) {
+
+    printf_s("‰½”Ô–Ú‚ÌƒZƒ‹‚ÌŒã‚ë‚É‘}“ü‚µ‚Ü‚·‚©\n");
+    scanf_s("%d", &iterator);
+
+    printf_s("‘}“ü‚·‚é’l‚ð“ü—Í‚µ‚Ä‚­‚¾‚³‚¢\n");
+    scanf_s("%d", &inputValue);
+
+    insertCell = GetInsertCellAddress(&head,iterator);
+    Create(insertCell,inputValue);
+
+    Index(&head);
+  }
 
   system("pause");
   return 0;
@@ -39,7 +55,7 @@ CELL* GetInsertCellAddress(CELL *endCell, int iteretor) {
 }
 
 void Create(CELL *currentCell, int val) {
-  CELL *newCell;
+  CELL *newCell = nullptr;
   newCell = (CELL*)malloc(sizeof(CELL));
   newCell->val = val;
   newCell->prev = currentCell;
