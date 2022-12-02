@@ -9,6 +9,7 @@ typedef struct cell {
 
 CELL *GetInsertCellAddress(CELL *endCELL, int iteretor);
 void Create(CELL *currentCell, int val);
+void Index(CELL *endCell);
 
 int main(void) {
   SetConsoleOutputCP(CP_UTF8);
@@ -42,4 +43,17 @@ void Create(CELL *currentCell, int val) {
     nextCell->prev = newCell;
   }
   currentCell->next = newCell;
+}
+
+void Index(CELL *endCell) {
+  int no = 1;
+  while (endCell->next != nullptr) {
+    endCell = endCell->next;
+    printf("%d", no);
+    printf("%p", endCell->prev);
+    printf("%5d", endCell->val);
+    printf("(%p)", endCell);
+    printf("%p\n", endCell->next);
+    no++;
+  }
 }
