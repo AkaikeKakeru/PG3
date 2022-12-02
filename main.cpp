@@ -15,6 +15,13 @@ int main(void) {
   SetConsoleOutputCP(CP_UTF8);
   setvbuf(stdout, nullptr, _IOFBF, 1024);
 
+  int iterator;
+  int inputValue;
+  CELL *insertCell;
+
+  CELL head;
+  head.next = nullptr;
+
   system("pause");
   return 0;
 }
