@@ -1,7 +1,13 @@
 #include <windows.h>
 #include <stdio.h>
 
-int main(void){
+typedef struct cell {
+  int val;
+  struct cell *prev;
+  struct cell *next;
+}CELL;
+
+int main(void) {
   SetConsoleOutputCP(CP_UTF8);
   setvbuf(stdout, nullptr, _IOFBF, 1024);
 
