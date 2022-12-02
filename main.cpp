@@ -10,18 +10,18 @@ typedef enum scene {
 }SCENE;
 
 typedef struct cell {
-  int val;
+  char str[64];
   struct cell *next;
 }CELL;
 
 CELL *GetInsertCellAddress(CELL *endCELL, int iteretor);
-void Create(CELL *currentCell, int val);
+void Create(CELL *endCell,const char *buf);
 void Index(CELL *endCell);
 void Delete(CELL* currentCell);
 
 int main(void) {
   int nowScene = homeScene;
-  int inputValue;
+  char inputStr[256] = "nihonnkougakuin";
   CELL head{};
   head.next = nullptr;
 
@@ -52,9 +52,9 @@ int main(void) {
     case insertScene:
       printf("[リスト要素の挿入]\n\n"
         "追加する要素の値を入力してください\n");
-      scanf_s("%d", &inputValue);
+      scanf_s("%s",inputStr,256);
 
-      Create(&head,inputValue);
+      Create(&head,inputStr);
 
       printf("要素がリストの最後尾に挿入されました"
         "\n"
@@ -97,23 +97,24 @@ CELL* GetInsertCellAddress(CELL *endCell, int iteretor) {
   return endCell;
 }
 
-void Create(CELL *currentCell, int val) {
+void Create(CELL *endCell,const char *buf){
   CELL *newCell;
   newCell = (CELL*)malloc(sizeof(CELL));
-  newCell->val = val;
+
+  strcpy_s(newCell->str,8,buf);
   newCell->next = nullptr;
 
-  while (currentCell->next != nullptr) {
-    currentCell = currentCell->next;
+  while (endCell->next != nullptr) {
+    endCell = endCell->next;
   }
-  currentCell->next = newCell;
+  endCell->next = newCell;
 }
 
 void Index(CELL *currentCell) {
   while (currentCell->next != nullptr) {
     currentCell = currentCell->next;
 
-    printf("%d\n", currentCell->val);
+    printf("%s\n", currentCell->str);
   }
 }
 
