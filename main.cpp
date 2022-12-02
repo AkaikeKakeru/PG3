@@ -7,7 +7,8 @@ typedef struct cell {
   struct cell *next;
 }CELL;
 
-CELL* GetInsertCellAddress(CELL* endCELL, int iteretor);
+CELL *GetInsertCellAddress(CELL *endCELL, int iteretor);
+void Create(CELL *currentCell, int val);
 
 int main(void) {
   SetConsoleOutputCP(CP_UTF8);
@@ -17,14 +18,28 @@ int main(void) {
   return 0;
 }
 
-CELL* GetInsertCellAddress(CELL* endCELL, int iteretor) {
+CELL* GetInsertCellAddress(CELL *endCell, int iteretor) {
   for (int i = 0; i < iteretor; i++){
-    if (endCELL->next) {
-      endCELL = endCELL->next;
+    if (endCell->next) {
+      endCell = endCell->next;
     }
     else {
       break;
     }
   }
-  return endCELL;
+  return endCell;
+}
+
+void Create(CELL *currentCell, int val) {
+  CELL *newCell;
+  newCell = (CELL*)malloc(sizeof(CELL));
+  newCell->val = val;
+  newCell->prev = currentCell;
+  newCell->next = currentCell->next;
+
+  if (currentCell->next) {
+    CELL* nextCell = currentCell->next;
+    nextCell->prev = newCell;
+  }
+  currentCell->next = newCell;
 }
