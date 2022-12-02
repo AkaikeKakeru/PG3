@@ -2,31 +2,39 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+//シーンenum
 typedef enum scene {
-  homeScene,
-  displayScene,
-  insertScene,
-  deleteScene,
+  homeScene,//ホーム
+  displayScene,//表示
+  insertScene,//挿入
+  deleteScene,//削除
 }SCENE;
 
+//自己参照構造体
 typedef struct cell {
-  char str[64];
-  struct cell *next;
+  char str[64];//文字列
+  struct cell* next;//次のセル
 }CELL;
 
-CELL *GetInsertCellAddress(CELL *endCELL, int iteretor);
-void Create(CELL *endCell,const char *buf);
-void Index(CELL *endCell);
+/*プロトタイプ*/
+void Create(CELL* endCell, const char* buf);
+void Index(CELL* endCell);
 void Delete(CELL* currentCell);
 
 int main(void) {
+  /*変数*/
+  //現シーン
   int nowScene = homeScene;
+
+  //入力文字列
   char inputStr[256] = "nihonnkougakuin";
+
+  //先頭セル
   CELL head{};
   head.next = nullptr;
 
   while (1) {
-    switch (nowScene){
+    switch (nowScene) {
     case homeScene:
       printf("[要素の操作]\n"
         "1.要素の表示\n"
@@ -52,14 +60,14 @@ int main(void) {
     case insertScene:
       printf("[リスト要素の挿入]\n\n"
         "追加する要素の値を入力してください\n");
-      scanf_s("%s",inputStr,256);
+      scanf_s("%s", inputStr, 256);
 
-      Create(&head,inputStr);
+      Create(&head, inputStr);
 
-      printf("要素がリストの最後尾に挿入されました"
+      printf("要素%sがリストの最後尾に挿入されました"
         "\n"
         "--------------------------------\n"
-        "0.初期画面に戻る\n");
+        "0.初期画面に戻る\n",inputStr);
       scanf_s("%d", &nowScene);
       printf("\n\n");
       break;
@@ -71,8 +79,8 @@ int main(void) {
         "\n"
         "--------------------------------\n"
         "0.初期画面に戻る\n");
-        scanf_s("%d", &nowScene);
-        printf("\n\n");
+      scanf_s("%d", &nowScene);
+      printf("\n\n");
       break;
 
     default:
@@ -85,23 +93,12 @@ int main(void) {
   return 0;
 }
 
-CELL* GetInsertCellAddress(CELL *endCell, int iteretor) {
-  for (int i = 0; i < iteretor; i++){
-    if (endCell->next) {
-      endCell = endCell->next;
-    }
-    else {
-      break;
-    }
-  }
-  return endCell;
-}
-
-void Create(CELL *endCell,const char *buf){
-  CELL *newCell;
+//セル生成
+void Create(CELL* endCell, const char* buf) {
+  CELL* newCell;
   newCell = (CELL*)malloc(sizeof(CELL));
 
-  strcpy_s(newCell->str,8,buf);
+  strcpy_s(newCell->str, 8, buf);
   newCell->next = nullptr;
 
   while (endCell->next != nullptr) {
@@ -110,23 +107,37 @@ void Create(CELL *endCell,const char *buf){
   endCell->next = newCell;
 }
 
-void Index(CELL *currentCell) {
+//索引
+void Index(CELL* currentCell) {
+  int no = 0;
+  printf("要素一覧:{\n");
   while (currentCell->next != nullptr) {
     currentCell = currentCell->next;
 
-    printf("%s\n", currentCell->str);
+    printf("%d:%s",no, currentCell->str);
+    no++;
+
+    if (currentCell->next != nullptr) {
+      printf(",\n");
+    }
+    else {
+      printf("\n");
+    }
   }
+  printf("}\n"
+  "要素数:%d",no);
 }
 
-void Delete(CELL *head){
+//削除
+void Delete(CELL* head) {
   CELL* prev;
   prev = head;
-  while (head->next != nullptr){
+  while (head->next != nullptr) {
     head = head->next;
     if (head->next != nullptr) {
       prev = head;
     }
-   }
+  }
   head = prev;
   head->next = nullptr;
 }
