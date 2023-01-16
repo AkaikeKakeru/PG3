@@ -1,6 +1,6 @@
 #pragma once
 
-class SceneManager {
+class SceneManager final{
 private:
   //コンストラクタをprivateにする
   SceneManager();
