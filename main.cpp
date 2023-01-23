@@ -9,9 +9,24 @@ int main(void){
   SceneManager* sceneManager_ = SceneManager::GetInstance();
 
   while (true){
+    const char* c = "a";
+    const char* C = "c";
+    const char* E = "e";
 
+    printf_s("Input [c] to Change Scene");
+
+
+    if (c == E) {
+      break;
+    }
+
+    if (c == C){
+      c = "a";
+      sceneManager_->Update();
+    }
 
     sceneManager_->Draw();
+    //scanf_s("%s", &c);
   }
 
   system("pause");
