@@ -2,12 +2,52 @@
 #include <stdio.h>
 
 void SceneManager::Update(){
-  char c = 0;
-  scanf_s("%c" ,)
+  int next = nowSceneNom_+1;
+
+  if (next > gameClear_num) {
+    next = title_num;
+  }
+
+  ChangeScene(next);
 }
 
 void SceneManager::Draw() {
-    printf_s("SceneNum : %d\nPress SPACE to Change Screen", nowSceneNom_);
+  printf_s(
+    "Scene : %s",
+    sceneName);
+
+  printf_s(
+    "SceneNum : %d\n Press SPACE to Change Screen",
+    nowSceneNom_);}
+
+void SceneManager::ChangeScene(int nextSceneNom){
+  nowSceneNom_ = nextSceneNom; 
+
+  switch (nowSceneNom_) {
+  case title_num:
+    sceneName = "Title";
+    break;
+
+  case newGame_num:
+    sceneName = "NewGame";
+    break;
+
+  case gamePlay_num:
+    sceneName = "GamePlay";
+    break;
+
+  case gameClear_num:
+    sceneName = "GameClear";
+    break;
+
+  default:
+    nowSceneNom_ = title_num;
+    sceneName = "Title";
+    break;
+  }
+};
+
+SceneManager::~SceneManager(){
 }
 
 SceneManager* SceneManager::GetInstance() {
