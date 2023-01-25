@@ -13,11 +13,11 @@ void SceneManager::Update(){
 
 void SceneManager::Draw() {
   printf_s(
-    "Scene : %s",
+    "Scene : %s\n",
     sceneName);
 
   printf_s(
-    "SceneNum : %d\n Press SPACE to Change Screen",
+    "SceneNum : %d\n\n",
     nowSceneNom_);}
 
 void SceneManager::ChangeScene(int nextSceneNom){
