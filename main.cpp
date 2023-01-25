@@ -2,34 +2,42 @@
 #include <stdio.h>
 #include "SceneManager.h"
 
-int main(void){
+int main(void) {
   SetConsoleOutputCP(CP_UTF8);
   setvbuf(stdout, nullptr, _IOFBF, 1024);
 
+  //シーンマネージャーのインスタンス
   SceneManager* sceneManager_ = SceneManager::GetInstance();
 
-  while (true){
-    char c = 'r';
-    char Change = 'c';
-    char End = 'e';
-    char Reset = 'r';
+  char input[2] = "r";
+  const char Change[2] = "c";
+  const char Reset[2] = "r";
 
-    printf_s("Input [c] to Change Scene");
+  printf_s("c を入力するとシーン切り替え\n");
+  printf_s("それ以外は終了\n");
 
-    scanf_s("%s", &c,1);
+  //ループ
+  while (true) {
 
+    //入力を受け付ける
+    scanf_s("%s", input, 2);
 
-    if (c == End) {
-      break;
-    }
-
-    if (c == Change){
+    //cなら切り替え
+    if (strcmp(input, Change) == 0) {
       sceneManager_->Update();
     }
+    //それ以外は終了
+    else{
+      return 0;
+    }
 
+    //現在シーンを表示
     sceneManager_->Draw();
 
-    c = Reset;
+    //Inputをcではなくする
+    for (size_t i = 0; i < sizeof(input); i++) {
+      input[i] = Reset[i];
+    }
   }
 
   system("pause");
