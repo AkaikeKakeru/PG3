@@ -18,8 +18,8 @@ int main(int argc,const char *argv[]) {
   int waitTimer = 3; //タイマー[second]
   int ans = EvenNum; //プレイヤーの、丁か半かの予測
 
-                     //関数オブジェクトを代入
-  std::function<int(int)> fI = [](int ans) {
+  //関数オブジェクトを代入
+  std::function<int(int)> fInput = [](int ans) {
     char str[4] = "k"; //プレイヤーの入力文字配列
 
     const char ODD[] = "k"; //比較用文字配列
@@ -52,14 +52,14 @@ int main(int argc,const char *argv[]) {
     }
 
     //それ以外は全部エラー入力扱いで設定
-    //ans = ErrorNum;
+    ans = ErrorNum;
 
-    //printf_s("【想定外の入力を確認】\n\n"
-    //  "%dが出力されました\n", ans);
+    printf_s("【想定外の入力を確認】\n\n"
+      "%dが出力されました\n", ans);
 
     return ans;
   };
-  std::function<int(int)> fR = [](int ans) {
+  std::function<int(int)> fResult = [](int ans) {
     //乱数シード生成器
     std::random_device seed_gen;
     //メルセンヌ・ツイスターの乱数エンジン
@@ -85,19 +85,17 @@ int main(int argc,const char *argv[]) {
     printf_s("【ハズレです】\n");
     return false;
   };
-  std::function<int(std::function<int(int)> func, int ans, int timer)> fT = [](std::function<int(int)> func, int ans, int timer) {
+  std::function<int(int,int)> SetTimeOut =
+    [](int func,int timer) {
     //timerをsecondに変換しつつ、funcの起動を遅らせる。
+    //Sleep終了直後にfunc起動
     Sleep(timer * 1000);
-
-    //Sleep終了直後に起動
-    func(ans);
-
     return 0;
   };
 
   //予測を入力するフェーズ
   //読み取った入力から、ansに EvenNum か OddNum を代入
-  ans = fI(ans);
+  ans = fInput(ans);
 
   //エラーナンバーじゃないなら
   if (ans != ErrorNum) {
@@ -105,7 +103,7 @@ int main(int argc,const char *argv[]) {
 
     //結果を出力するフェーズ
     //勿体ぶってからResultを起動
-    fT(fR, ans, waitTimer);
+    SetTimeOut(fResult(ans), waitTimer);
   }
 
   system("pause");
