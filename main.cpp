@@ -4,55 +4,86 @@
 #include <list>
 #include <iostream>
 
-using namespace std;
+int main() {
+  char input[8] = "1970";
 
-//int main(){
-//	vector<string> f = {"a","b","c"};
-//	int size = f.size();
-//
-//	for (vector<string>::iterator it_f = f.begin();
-//		it_f != f.end();
-//		it_f++){
-//
-//		cout << *it_f << endl;
-//	}
-//
-//	return 0;
-//}
+  char generation[3][8] = {
+    "1970",
+  "2019",
+  "2022"
+  };
 
-//int main(){
-//	list <int> lst{1,2,3,4,5};
-//
-//	int size = lst.size();
-//
-//	for (auto it_f = lst.begin();
-//		it_f != lst.end();
-//		it_f++){
-//
-//		cout << *it_f << "\n";
-//	}
-//
-//	return 0;
-//}
+  std::list <const char*> lst{
+    "1970",
+    "Tokyo","Kanda","Akihabara","Okachimachi","Ueno",
+    "Uguisudani","Nippori","Tabata","Komagome",
+    "Sugamo","Otsuka","Ikebukuro","Mejiro","Takadanobaba",
+    "Shin-Okubo","Shinjuku","Yoyogi","Harajuku","Shibuya",
+    "Ebisu","Meguro","Gotanda","Osaki","Shinagawa",
+   "Tamachi","Hamamatsucho","Shimbashi","Yurakucho"
+  };
 
-int main(){
-	list <string> lst{
-		"Tokyo","Kanda","Akihabara","Okachimachi","Ueno",
-		"Uguisudani","Nippori","Nishi-Nippori","Tabata","Komagome",
-		"Sugamo","Otsuka","Ikebukuro","Mejiro","Takadanobaba",
-		"Shin-Okubo","Shinjuku","Yoyogi","Harajuku","Shibuya",
-		"Ebisu","Meguro","Gotanda","Osaki","Shinagawa",
-		"Takanawa Gateway","Tamachi","Hamamatsucho","Shimbashi","Yurakucho"
-	};
+  int size = lst.size();
 
-	int size = lst.size();
+  printf("1970、2019、2022、いずれかを入力してください。\n");
 
-	for (auto it_f = lst.begin();
-		it_f != lst.end();
-		it_f++){
+  scanf_s("%s", input,8);
 
-		cout << *it_f << "\n";
-	}
+  //2019が入力されたら
+  if (strcmp(input, generation[1]) == 0) {
+    //1970表記を削除
+      lst.pop_front();
 
-	return 0;
+    for (std::list<const char*>::iterator itr = lst.begin(); itr != lst.end(); ++itr) {
+      //2019表記
+      if (*itr == "Tokyo") {
+        itr = lst.insert(itr, "2019");
+        ++itr;
+      }
+
+      //西日暮里を挿入追加
+      if (*itr == "Tabata") {
+        itr = lst.insert(itr, "Nishi-Nippori");
+        ++itr;
+      }
+    }
+  }
+  //2022が入力されたら
+  else if (strcmp(input, generation[2]) == 0) {
+    //1970表記を削除
+      lst.pop_front();
+
+    for (std::list<const char*>::iterator itr = lst.begin(); itr != lst.end(); ++itr) {
+      //2020表記
+      if (*itr == "Tokyo") {
+        itr = lst.insert(itr, "2020");
+        ++itr;
+      }
+
+      //西日暮里を挿入追加
+      if (*itr == "Tabata") {
+        itr = lst.insert(itr, "Nishi-Nippori");
+        ++itr;
+      }
+      //高輪ゲートウェイを挿入追加
+      if (*itr == "Tamachi") {
+        itr = lst.insert(itr, "Takanawa Gateway");
+        ++itr;
+      }
+    }
+  }
+  //1970が入力されてなかったら
+  else if (strcmp(input, generation[0]) != 0) {
+    printf_s("ERROR");
+    return 0;
+  }
+
+  //リストを一覧表示
+  for (auto it_f = lst.begin();
+    it_f != lst.end();
+    it_f++) {
+    std::cout << *it_f << "\n";
+  }
+
+  return 0;
 }
