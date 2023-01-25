@@ -1,8 +1,7 @@
 #include "Enemy.h"
 #include <stdio.h>
 
-void (Enemy::* Enemy::spfuncTable[])()
-= {
+void (Enemy::* Enemy::spfuncTable[])()= {
   &Enemy::Approach,
   &Enemy::Fire,
   &Enemy::Secession
