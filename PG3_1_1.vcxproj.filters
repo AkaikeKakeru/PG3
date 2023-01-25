@@ -13,54 +13,18 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
-    <Filter Include="ソース ファイル\Scene">
-      <UniqueIdentifier>{93a161a9-7f8c-4994-8c74-7ca7060c2640}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="ヘッダー ファイル\Sccene">
-      <UniqueIdentifier>{325a6a84-0d6a-4e87-9f10-1fa140505585}</UniqueIdentifier>
-    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
       <Filter>ソース ファイル</Filter>
-    </ClCompile>
-    <ClCompile Include="GamePlay.cpp">
-      <Filter>ソース ファイル\Scene</Filter>
-    </ClCompile>
-    <ClCompile Include="GameClear.cpp">
-      <Filter>ソース ファイル\Scene</Filter>
-    </ClCompile>
-    <ClCompile Include="NewGame.cpp">
-      <Filter>ソース ファイル\Scene</Filter>
-    </ClCompile>
-    <ClCompile Include="Title.cpp">
-      <Filter>ソース ファイル\Scene</Filter>
-    </ClCompile>
-    <ClCompile Include="Base.cpp">
-      <Filter>ソース ファイル\Scene</Filter>
     </ClCompile>
     <ClCompile Include="SceneManager.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="GameClear.h">
-      <Filter>ヘッダー ファイル\Sccene</Filter>
-    </ClInclude>
-    <ClInclude Include="GamePlay.h">
-      <Filter>ヘッダー ファイル\Sccene</Filter>
-    </ClInclude>
-    <ClInclude Include="NewGame.h">
-      <Filter>ヘッダー ファイル\Sccene</Filter>
-    </ClInclude>
-    <ClInclude Include="Title.h">
-      <Filter>ヘッダー ファイル\Sccene</Filter>
-    </ClInclude>
     <ClInclude Include="SceneManager.h">
       <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="Base.h">
-      <Filter>ヘッダー ファイル\Sccene</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
