@@ -85,5 +85,7 @@ int main() {
     std::cout << *it_f << "\n";
   }
 
+  system("pause");
+
   return 0;
 }
