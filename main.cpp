@@ -14,7 +14,10 @@ int main(void) {
   const char Reset[2] = "r";
 
   printf_s("c を入力するとシーン切り替え\n");
-  printf_s("それ以外は終了\n");
+  printf_s("それ以外は終了\n\n");
+
+  //最初のシーン表示
+  sceneManager_->Draw();
 
   //ループ
   while (true) {
