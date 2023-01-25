@@ -14,7 +14,6 @@ int main() {
   };
 
   std::list <const char*> lst{
-    "1970",
     "Tokyo","Kanda","Akihabara","Okachimachi","Ueno",
     "Uguisudani","Nippori","Tabata","Komagome",
     "Sugamo","Otsuka","Ikebukuro","Mejiro","Takadanobaba",
@@ -26,59 +25,37 @@ int main() {
   int size = lst.size();
 
   printf("1970、2019、2022、いずれかを入力してください。\n");
+  scanf_s("%s", input, 8);
 
-  scanf_s("%s", input,8);
-
-  //2019が入力されたら
-  if (strcmp(input, generation[1]) == 0) {
-    //1970表記を削除
-      lst.pop_front();
-
+  //2019,または2022が入力されたら
+  if (strcmp(input, generation[1]) == 0
+    || strcmp(input, generation[2]) == 0) {
     for (std::list<const char*>::iterator itr = lst.begin(); itr != lst.end(); ++itr) {
-      //2019表記
-      if (*itr == "Tokyo") {
-        itr = lst.insert(itr, "2019");
-        ++itr;
-      }
-
       //西日暮里を挿入追加
       if (*itr == "Tabata") {
         itr = lst.insert(itr, "Nishi-Nippori");
         ++itr;
       }
-    }
-  }
-  //2022が入力されたら
-  else if (strcmp(input, generation[2]) == 0) {
-    //1970表記を削除
-      lst.pop_front();
 
-    for (std::list<const char*>::iterator itr = lst.begin(); itr != lst.end(); ++itr) {
-      //2020表記
-      if (*itr == "Tokyo") {
-        itr = lst.insert(itr, "2020");
-        ++itr;
-      }
-
-      //西日暮里を挿入追加
-      if (*itr == "Tabata") {
-        itr = lst.insert(itr, "Nishi-Nippori");
-        ++itr;
-      }
-      //高輪ゲートウェイを挿入追加
-      if (*itr == "Tamachi") {
-        itr = lst.insert(itr, "Takanawa Gateway");
-        ++itr;
+      //2022の方が入力されていたら
+      if (strcmp(input, generation[2]) == 0) {
+        //高輪ゲートウェイを挿入追加
+        if (*itr == "Tamachi") {
+          itr = lst.insert(itr, "Takanawa Gateway");
+          ++itr;
+        }
       }
     }
   }
+
   //1970が入力されてなかったら
   else if (strcmp(input, generation[0]) != 0) {
-    printf_s("ERROR");
+    printf_s("\nERROR");
     return 0;
   }
 
   //リストを一覧表示
+  printf("\n表示年代 : %s\n", input);
   for (auto it_f = lst.begin();
     it_f != lst.end();
     it_f++) {
@@ -86,6 +63,5 @@ int main() {
   }
 
   system("pause");
-
   return 0;
 }
